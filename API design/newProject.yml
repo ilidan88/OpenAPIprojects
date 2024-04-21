@@ -10,10 +10,21 @@ paths:
       description: | 
         Search for products in catalog 
         using a free query parameter
+      parameters:
+        - name: free-query
+          description: a products name
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           description: |
             Products matvhing free query parameter 
-
-
-  
+    post:
+      summary: Add product 
+      description: |
+        add product in catalog
+      responses:
+        "200":
+          description: Product addad to catalog
