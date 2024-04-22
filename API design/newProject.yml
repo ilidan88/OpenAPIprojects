@@ -20,7 +20,43 @@ paths:
       responses:
         "200":
           description: |
-            Products matvhing free query parameter 
+            Products matvhing free query parameter
+          content:
+            application/json:
+              schema:
+                type: array
+                description: array of Products
+                items:
+                  type: object
+                  description: A product
+                required:
+                  - referens
+                  - name
+                  - price
+                  - supplier
+                properties:
+                  referens:
+                    description: UID a product
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    description: price
+                    type: number
+                  description:
+                    type: string
+                  supplier:
+                    type: object
+                    description: products supplier
+                    required:
+                      - referens
+                      - name
+                    properties:
+                      referens:
+                        type: string
+                      name:
+                        type: string 
+
     post:
       summary: Add product 
       description: |
