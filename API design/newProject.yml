@@ -2,6 +2,41 @@ openapi: "3.0.0"
 info:
   title: Shoppeng API
   version: "1.0"
+components:
+  schemas:
+    product:
+      type: array
+      description: array of Products
+      items:
+        type: object
+        description: A product
+      required:
+        - referens
+        - name
+        - price
+        - supplier
+      properties:
+        referens:
+          description: UID a product
+          type: string
+        name:
+          type: string
+        price:
+          description: price
+          type: number
+        description:
+          type: string
+        supplier:
+          type: object
+          description: products supplier
+          required:
+            - referens
+            - name
+          properties:
+            referens:
+              type: string
+            name:
+              type: string 
 paths: 
   /products:
     description: The products catalog
@@ -24,43 +59,29 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                description: array of Products
-                items:
-                  type: object
-                  description: A product
-                required:
-                  - referens
-                  - name
-                  - price
-                  - supplier
-                properties:
-                  referens:
-                    description: UID a product
-                    type: string
-                  name:
-                    type: string
-                  price:
-                    description: price
-                    type: number
-                  description:
-                    type: string
-                  supplier:
-                    type: object
-                    description: products supplier
-                    required:
-                      - referens
-                      - name
-                    properties:
-                      referens:
-                        type: string
-                      name:
-                        type: string 
-
+                $ref: "#/components/schemas/product"
     post:
       summary: Add product 
       description: |
         add product in catalog
+      requestBody:
+        description: Add product to castalog 
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - price 
+                - supplierReference
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                description:
+                  type: string
+                supplierReference:
+                  type: string
       responses:
         "200":
           description: Product addad to catalog
